@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="css/style.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <h1>ANA NEVER DIE</h1>
+    <input type="button" value="추가하기" onClick="window.location.href='addDirector'">
     <% for(i = 0; i < Director.length; i++) { %>
     <a id="<%= Director[i]%>" onClick="showProfile(this.id)" style="cursor:pointer"><%= Director[i]%></a>
     <% } %>
 
     <script>
         async function showProfile(id) {
-            const contents = document.getElementById(id).innerText;
             const result = await axios.post('/', {
-                contents
+                contents:id
             });
-            location.reload();
         }
     </script>
 </body>
