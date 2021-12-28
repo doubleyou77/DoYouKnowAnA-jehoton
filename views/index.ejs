@@ -12,7 +12,7 @@
     <h1>ANA NEVER DIE</h1>
     <input type="button" value="추가하기" onClick="window.location.href='addDirector'">
     <% for(i = 0; i < Director.length; i++) { %>
-    <a id="<%= Director[i]%>" onClick="showProfile(this.id)" style="cursor:pointer"><%= Director[i]%></a>
+    <a id="<%= Director[i]%>" onClick="showProfile(this.id);" style="cursor:pointer"><%= Director[i]%></a>
     <% } %>
 
     <script>
@@ -20,6 +20,10 @@
             const result = await axios.post('/', {
                 contents:id
             });
+        }
+
+        async function receiveprofile() {
+            
         }
     </script>
 </body>
