@@ -1,9 +1,13 @@
 const express = require('express');
-//const mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const directorModel = require('./models/Director');
 
 const app = express();
 
-//mongoose.connect('mongodb://dbdb:dbdb@localhost:27017/mydb');
+mongoose.connect('mongodb://localhost/jehoton',
+{
+    useNewUrlParser: true
+});
 
 app.use(express.json());
 app.set('view engine','ejs');
@@ -27,8 +31,13 @@ app.get('/addDirector', (req, res) => {
     res.render('addDirector');
 });
 
-app.post('/addDirector', (req, res) => {
-    res.render('index', { Director });
+app.post('/addDirector', async (req, res) => {
+    const { directorName, directorInf } = req.body;
+
+    await directorModel.create({ 
+        directorName, directorInf
+    });
+    
 });
 
 app.get('*', (req, res) => {
