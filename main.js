@@ -34,12 +34,13 @@ app.get('/', async (req, res) => {
     res.render('index', { Director });
 });
 
-app.post('/', async (req, res) => {
-    const { contents } = req.body;
+app.get('/director', async (req, res) => {
+    const { contents } = req.query;
 
     await checkDirector(contents);
     console.log(Directorprofile);
-    res.render('index', { Director, Directorprofile });
+    res.json(Directorprofile);
+    // res.render('index', { Director, Directorprofile });
     //데이터 프론트로 넘기기
 });
 

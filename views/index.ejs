@@ -12,19 +12,37 @@
     <h1>ANA NEVER DIE</h1>
     <input type="button" value="추가하기" onClick="window.location.href='addDirector'">
     <% for(i = 0; i < Director.length; i++) { %>
-    <a id="<%= Director[i]%>" onClick="showProfile(this.id);" style="cursor:pointer"><%= Director[i]%></a>
+    <a id="<%= Director[i]%>" onClick="getProfile(this.id);" style="cursor:pointer"><%= Director[i]%></a>
     <% } %>
 
+    <img id="img" width="200px" height="200px">
+    <div id="content">
+    </div>
+
+    <button onClick="document.getElementById('banner').src = `img/배너.jpg`;">크래딧</button>
+    <img id="banner" src="#">
+
     <script>
-        async function showProfile(id) {
-            const result = await axios.post('/', {
-                contents:id
+        async function getProfile(id) {
+            const result = await axios.get('/director', {
+                params: {
+                    contents: id
+                }
             });
+            console.log(id, String(result.data));
+            document.getElementById('img').src = `img/${id}.jpg`;
+            switch(id) {
+                case '조재호' : document.getElementById('img').src = `img/${id}.jpg`; break;
+                case '안용호' : document.getElementById('img').src = `img/${id}.jpg`; break;
+                case '심영수' : document.getElementById('img').src = `img/${id}.jpg`; break;
+                case '이혜찬' : document.getElementById('img').src = `img/${id}.jpg`; break;
+                case '민경록' : document.getElementById('img').src = `img/${id}.jpg`; break;
+                case '김형진' : document.getElementById('img').src = `img/${id}.jpg`; break;
+                default : document.getElementById('img').src = `img/notFound.png`; break;
+            }
+            document.getElementById('content').innerHTML = String(result.data);
         }
 
-        async function receiveprofile() {
-            
-        }
     </script>
 </body>
 </html>
